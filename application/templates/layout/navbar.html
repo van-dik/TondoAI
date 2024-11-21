@@ -1,0 +1,10 @@
+{% load static %}
+
+<nav class=v-navbar>
+    <a href="{% url 'home' %}">Logotipo</a>
+    {% comment %} <ul>
+        {% for item in chats %}
+        <li>{% item.title %}</li>
+        {% endfor %}
+    <ul> {% endcomment %}
+</nav>

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load django.contrib.auth.models User %}
+
+
+{% block content %}
+    <div class="chat-header">
+        {% if user.is_authenticated %}
+        <h2>Hello, {{ user.username }}!</h2>
+        {% endif %}
+    </div>
+{% endblock %}

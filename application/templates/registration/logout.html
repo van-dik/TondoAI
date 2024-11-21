@@ -1,0 +1,61 @@
+{% comment %} {% include "layout/layout.html" %}
+
+
+Sim, para permitir que os usuários façam login, logout e se registrem no seu aplicativo Django, você precisará criar templates e configurar URLs para essas páginas. Aqui está um guia de como fazer isso:
+
+1. Configurando URLs para Login, Logout e Registro
+No seu arquivo urls.py (do seu aplicativo ou do projeto), adicione rotas para as páginas de login, logout e registro.
+
+python
+Copiar código
+from django.urls import path
+from django.contrib.auth import views as auth_views
+from . import views  # Importe suas views personalizadas para registro
+
+urlpatterns = [
+    # URLs de autenticação padrão do Django
+    path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+
+    # URL para registro personalizado
+    path('register/', views.register, name='register'),
+]
+2. Criando Templates para Login, Logout e Registro
+Você precisará criar os templates HTML para essas páginas. Coloque esses templates na pasta templates/registration/.
+
+2.1. Template de Login (templates/registration/login.html)
+html
+Copiar código
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    <p>Não tem uma conta? <a href="{% url 'register' %}">Registre-se aqui</a></p>
+</body>
+</html>
+2.2. Template de Registro (templates/registration/register.html)
+html
+Copiar código
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registro</title>
+</head>
+<body>
+    <h2>Registro</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Registrar</button>
+    </form>
+    <p>Já tem uma conta? <a href="{% url 'login' %}">Faça login aqui</a></p>
+</body>
+</html> {% endcomment %}
